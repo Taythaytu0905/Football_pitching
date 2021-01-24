@@ -1,0 +1,25 @@
+# Distribution / packaging
+.idea
+*.env
+__pycache__/
+
+# dotenv
+src/.env
+
+# virtualenv
+venv/
+ENV/
+env/
+media/
+
+# project settings
+/src/media/*
+/src/videos/*
+/.idea
+/env/
+/src/cache/*
+src/config.env
+*.sh
+
+# .vscode
+.vscode/
