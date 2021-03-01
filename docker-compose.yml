@@ -1,24 +1,27 @@
-version: "3"
+version: '3.7'
 
 services:
-  src:
+  backend:
     build:
-      context: .
+      context: ""
+      dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - 8000:8000
     volumes:
-      - ./src:/src
-    environment:
-      - DB_HOST=db
-      - DB_NAME=app
-      - DB_USER=postgres
-      - DB_PASS=supersecretpassword
+      - .:/app
     depends_on:
       - db
 
   db:
-    image: postgres:10-alpine
+    image: mysql:5.7.22
+    restart: always
+    env_file: .env
     environment:
-      - POSTGRES_DB=app
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=supersecretpassword
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PW
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASS
+    volumes:
+      - .dbdata:/var/lib/mysql
+    ports:
+      - 33068:3306

@@ -14,9 +14,9 @@ import os
 import environ
 
 env = environ.Env()
-# reading config.env file
+# reading .env file
 root_path = environ.Path(__file__) - 3
-environ.Env.read_env(root_path('config.env'))
+environ.Env.read_env(root_path('.env'))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,7 +31,7 @@ REFRESH_JWT_SECRET = '2qbcmb_$^wm6=*rx77_yf3b$41_u6=r77ofnsk$hfmu*78mw=d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 AUTH_USER_MODEL = 'api_users.CustomUser'
 
 # Application definition
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'api_bookings',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -98,10 +99,11 @@ WSGI_APPLICATION = 'football.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': os.environ.get('DB_HOST'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASS'),
+        'HOST': os.environ.get("DB_HOST"),
+        'PORT': os.environ.get("DB_PORT"),
+        'NAME': os.environ.get("DB_NAME"),
+        'USER': os.environ.get("DB_USER"),
+        'PASSWORD': os.environ.get("DB_PASS"),
     }
 }
 
@@ -140,3 +142,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CORS_ORIGIN_ALLOW_ALL = True
