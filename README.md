@@ -1,3 +1,6 @@
-#DB
-python -m venv .
-source bin/activace
+# Setup
+docker-compose up --build
+# Start
+ docker exec -ti id_container bash
+
+
